@@ -6,6 +6,7 @@ environment:
 install:
   - cinst mingw-get
   - set PATH=%PATH%;C:\MinGW\msys\1.0\bin;C:\MinGW\bin
+  - mingw-get install autoconf automake libtool make
 
 build_script:
   - bash bootstrap
