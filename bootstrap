@@ -1,0 +1,11 @@
+#!/bin/sh
+
+#if test `uname -s` = "Darwin"; then
+#    glibtoolize --force
+#else
+#    libtoolize --force
+#fi
+aclocal #-I `pwd`/m4
+autoheader
+automake --add-missing
+autoconf

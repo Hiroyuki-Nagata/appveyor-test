@@ -1,20 +1,21 @@
 environment:
   matrix:
-    - GENERATOR: "Visual Studio 12"
-      CONFIG: Debug
+    - COMPILER: "MINGW32"
+    - COMPILER: "MINGW64"
 
-    - GENERATOR: "Visual Studio 12"
-      CONFIG: Release
-
-    - GENERATOR: "Visual Studio 12 Win64"
-      CONFIG: Debug
-
-    - GENERATOR: "Visual Studio 12 Win64"
-      CONFIG: Release
+# scripts that run after cloning repository
+install:
+  - cinst mingw-get
+  - cinst git
+  - set PATH=%PATH%;C:\MinGW\msys\1.0\bin;C:\MinGW\bin
+  - mingw-get install mingw-developer-toolkit
+  - mingw-get install msys-zip
+  - mingw-get install msys-unzip
 
 build_script:
-  - cmake "-G%GENERATOR%" -H. -B_builds
-  - cmake --build _builds --config "%CONFIG%"
+  - ./bootstrap
+  - ./configure
+  - make
 
 test_script:
   - ps: cd _builds
