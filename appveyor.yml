@@ -1,22 +1,13 @@
 environment:
   matrix:
     - COMPILER: "MINGW32"
-    - COMPILER: "MINGW64"
 
 # scripts that run after cloning repository
 install:
   - cinst mingw-get
-  - cinst git
   - set PATH=%PATH%;C:\MinGW\msys\1.0\bin;C:\MinGW\bin
-  - mingw-get install mingw-developer-toolkit
-  - mingw-get install msys-zip
-  - mingw-get install msys-unzip
 
 build_script:
-  - ./bootstrap
-  - ./configure
+  - bash bootstrap
+  - bash configure
   - make
-
-test_script:
-  - ps: cd _builds
-  - ctest -VV -C "%CONFIG%"
