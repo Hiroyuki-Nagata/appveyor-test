@@ -1,16 +1,25 @@
+#
+# Custom environment variables
+#
 environment:
+  global:
+    MSYS_ROOT: C:/MinGW/msys/1.0
+
   matrix:
     - COMPILER: "MINGW32"
-
+#
 # scripts that run after cloning repository
+#
 install:
   - set PATH=%PATH%;C:\MinGW\msys\1.0\bin;C:\MinGW\bin
-  - mingw-get install autoconf automake libtool 
+  - mingw-get install autoconf automake libtool make
 
 build_script:
-  - mount C:/MinGW /mingw
-  - bash bootstrap
-  - bash configure
-  - make
-
-#  - cinst mingw-get
+  - cmd: 'echo Msys root is: %MSYS_ROOT%'
+  - cmd: 'echo Build folder is: %APPVEYOR_BUILD_FOLDER%'
+  - cmd: 'echo Bootstrap running...'
+  - cmd: '%MSYS_ROOT%/bin/bash -lc "cd $APPVEYOR_BUILD_FOLDER; exec 0</dev/null; ./bootstrap"'
+  - cmd: 'echo Configure running...'
+  - cmd: '%MSYS_ROOT%/bin/bash -lc "cd $APPVEYOR_BUILD_FOLDER; exec 0</dev/null; ./configure"'
+  - cmd: 'echo Make running...'
+  - cmd: '%MSYS_ROOT%/bin/bash -lc "cd $APPVEYOR_BUILD_FOLDER; exec 0</dev/null; make"'
