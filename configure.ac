@@ -3,6 +3,7 @@
 
 AC_PREREQ([2.68])
 AC_INIT([appveyor-test], [1.0.0], [newserver002@gmail.com])
+AM_INIT_AUTOMAKE([-Wno-portability])
 AC_CONFIG_SRCDIR([foo.cpp])
 AC_CONFIG_HEADERS([config.h])
 
