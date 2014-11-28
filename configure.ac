@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.69])
+AC_PREREQ([2.68])
 AC_INIT([appveyor-test], [1.0.0], [newserver002@gmail.com])
 AC_CONFIG_SRCDIR([foo.cpp])
 AC_CONFIG_HEADERS([config.h])

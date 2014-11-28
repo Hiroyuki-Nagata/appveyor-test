@@ -1,0 +1,33 @@
+language: cpp
+
+env:
+
+compiler:
+  - g++
+
+os:
+  - osx
+  - linux
+
+install:
+  # LINUX
+  - if [ "$TRAVIS_OS_NAME" == "linux" ] && [ "$CXX" = "g++" ]; then sudo apt-get install -qq g++-4.7; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ] && [ "$CXX" = "g++" ]; then export CXX="g++-4.7" && export CC="gcc-4.7"; fi
+  # OSX
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install gsed automake autoconf libtool wxmac; fi
+
+before_script:
+  - echo $TRAVIS_OS_NAME
+  - autoreconf -i -I/usr/share/gnulib/m4 -I `pwd`/m4
+
+script:
+  - ./configure && make
+
+branches:
+  only:
+    - master
+
+notifications:
+  email:
+    on_success: change
+    on_failure: always
